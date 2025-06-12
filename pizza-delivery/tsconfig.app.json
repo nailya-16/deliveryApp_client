@@ -4,7 +4,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "importHelpers": true,
+    "module": "es2022",
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*.ts"
