@@ -1,0 +1,19 @@
+<div class="layout-root">
+  <header>
+    <div class="header-content">
+      <div class="logo-block">
+        <img src="pizza-logo.png" alt="Pizza Delivery" class="header-logo" />
+        <span class="brand-title">Pizza Delivery</span>
+      </div>
+      <p-menubar [model]="items"></p-menubar>
+      <button class="order-btn" routerLink="/order">Сделать заказ</button>
+    </div>
+    <div class="banner">🍕 Горячая доставка за 30 минут!</div>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer>
+    &copy; 2025 Pizza Delivery. Все права защищены.
+  </footer>
+</div>

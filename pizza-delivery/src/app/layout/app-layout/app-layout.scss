@@ -1,0 +1,99 @@
+.layout-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f7fa;
+}
+
+header {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70px;
+    padding: 0 24px;
+    gap: 16px;
+  }
+
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .header-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(255, 100, 0, 0.08);
+      background: #fff;
+    }
+
+    .brand-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #c0392b;
+      font-family: 'Inter Tight', 'Arial', sans-serif;
+      text-shadow: 0 2px 8px rgba(255,100,0,0.06);
+    }
+  }
+
+  .order-btn {
+    background: #ff9800;
+    color: #fff;
+    border: 3px #b17e14 solid;
+    padding: 0.6em 1.5em;
+    font-size: 1.13em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255,152,0,.09);
+    transition: background 0.2s;
+    margin-left: 18px;
+  }
+  .order-btn:hover {
+    background: #ff6600;
+  }
+
+  .banner {
+    width: 100%;
+    background: #ff9800;
+    color: #fff;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 1.09rem;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    animation: fadeInDown 0.7s;
+  }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px);}
+  to { opacity: 1; transform: none;}
+}
+
+main {
+  flex: 1 1 auto;
+  padding: 32px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+footer {
+  padding: 16px 8px;
+  background: #24292f;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  margin-top: auto;
+}
