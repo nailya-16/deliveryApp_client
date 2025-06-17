@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "name": "Маргарита",
+    "description": "Томатный соус, сыр моцарелла, базилик",
+    "price": 450,
+    "image": "img_pizzas/pizza2.png"
+  },
+  {
+    "id": 2,
+    "name": "Пепперони",
+    "description": "Пикантная пепперони, томатный соус, сыр моцарелла",
+    "price": 520,
+    "image": "img_pizzas/pizza1.png"
+    
+  },
+  {
+    "id": 3,
+    "name": "Четыре сыра",
+    "description": "Моцарелла, дор-блю, пармезан, чеддер, сливочный соус",
+    "price": 590,
+    "image": "img_pizzas/pizza5.png"
+  },
+  {
+    "id": 4,
+    "name": "Вегетарианская",
+    "description": "Томаты, болгарский перец, шампиньоны, маслины, сыр моцарелла",
+    "price": 495,
+    "image": "img_pizzas/pizza7.png"
+  },
+  {
+    "id": 5,
+    "name": "Гавайская",
+    "description": "Курица, ананасы, сыр моцарелла, томатный соус",
+    "price": 540,
+    "image": "img_pizzas/pizza4.png"
+  },
+  {
+    "id": 6,
+    "name": "Мясная",
+    "description": "Ветчина, бекон, салями, томатный соус, сыр моцарелла",
+    "price": 650,
+    "image": "img_pizzas/pizza6.png"
+  },
+  {
+    "id":7,
+    "name": "Барбекю",
+    "description": "Курица, бекон, лук, грибы, соус барбекю, сыр моцарелла",
+    "price": 670,
+    "image": "img_pizzas/pizza3.png"
+  },
+  {
+    "id": 8,
+    "name": "Дьябло",
+    "description": "Острое пепперони, перец чили, томатный соус, сыр моцарелла",
+    "price": 600,
+    "image": "img_pizzas/pizza1.png"
+  },
+  {
+    "id": 9,
+    "name": "Цыпленок Ранч",
+    "description": "Курица, соус ранч, шампиньоны, сыр моцарелла",
+    "price": 630,
+    "image": "img_pizzas/pizza3.png"
+  },
+  {
+    "id": 10,
+    "name": "Морская",
+    "description": "Крабовые палочки, креветки, кальмары, сливочный соус, сыр моцарелла",
+    "price": 720,
+    "image": "img_pizzas/pizza7.png"
+  }
+]
