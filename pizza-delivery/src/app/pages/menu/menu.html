@@ -1,1 +1,15 @@
-<p>menu works!</p>
+<h2>Меню пиццы</h2>
+
+<div *ngIf="loading">Загрузка...</div>
+<div *ngIf="error">{{error}}</div>
+<div class="pizza-list" *ngIf="!loading && !error">
+  <div class="pizza-card" *ngFor="let pizza of pizzas">
+    <img [src]="pizza.image" alt="{{pizza.name}}" class="pizza-img"/>
+    <h3>{{pizza.name}}</h3>
+    <p class="pizza-desc">{{pizza.description}}</p>
+    <div class="pizza-footer">
+      <span class="pizza-price">{{pizza.price | currency:'RUB':'symbol':'1.0-0'}}</span>
+      <button>В корзину</button>
+    </div>
+  </div>
+</div>
