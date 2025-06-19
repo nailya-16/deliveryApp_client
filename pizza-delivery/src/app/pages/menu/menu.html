@@ -24,7 +24,7 @@
   </aside>
 
   <div class="pizza-list" *ngIf="!loading && !error">
-  <div class="pizza-card" *ngFor="let pizza of pizzas">
+  <div class="pizza-card" *ngFor="let pizza of filteredPizzas">
     <img [src]="pizza.image" alt="{{pizza.name}}" class="pizza-img"/>
     <h3>{{pizza.name}}</h3>
     <p class="pizza-desc">{{pizza.description}}</p>
