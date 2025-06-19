@@ -64,24 +64,27 @@ button {
   align-items: flex-start;
 }
 .menu-aside {
-  width: 340px;
+  width: 250px;
   background: #fffde6;
   border-radius: 14px;
   padding: 22px 18px;
   box-shadow: 0 2px 10px rgba(255,152,0,0.07);
   font-size: 1.01rem;
+  margin: 24px 0;
 }
 h3 {
     margin-top: 0;
     margin-bottom: 16px;
     font-size: 1.16rem;
     color: #d35400;
+    width: 200px;
   }
 .ingredient-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 20px;
+  width: 150px;
 
   button {
     background: #ffe0b2;
