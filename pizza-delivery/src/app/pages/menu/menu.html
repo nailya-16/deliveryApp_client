@@ -5,7 +5,7 @@
 
 <div class="menu-layout" *ngIf="!loading && !error">
   <aside class="menu-aside">
-    <h3>Фильтр по ингредиенту</h3>
+    <h3 class="ingredient-h3">Фильтр по ингредиенту</h3>
     <div class="ingredient-buttons">
       <button
         type="button"
@@ -26,7 +26,7 @@
   <div class="pizza-list" *ngIf="!loading && !error">
   <div class="pizza-card" *ngFor="let pizza of filteredPizzas">
     <img [src]="pizza.image" alt="{{pizza.name}}" class="pizza-img"/>
-    <h3>{{pizza.name}}</h3>
+    <h3 class="pizza-h3">{{pizza.name}}</h3>
     <p class="pizza-desc">{{pizza.description}}</p>
     <div class="pizza-footer">
       <span class="pizza-price">{{pizza.price | currency:'RUB ':'symbol':'1.0-0'}}</span>
