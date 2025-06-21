@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Pizza } from '../../models/pizza';
-import { PizzaService } from '../../services/pizza';
+import { PizzaService } from '../../services/pizza.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
