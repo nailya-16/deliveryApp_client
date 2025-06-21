@@ -28,10 +28,23 @@
     <img [src]="pizza.image" alt="{{pizza.name}}" class="pizza-img"/>
     <h3 class="pizza-h3">{{pizza.name}}</h3>
     <p class="pizza-desc">{{pizza.description}}</p>
+    
     <div class="pizza-footer">
-      <span class="pizza-price">{{pizza.price | currency:'RUB ':'symbol':'1.0-0'}}</span>
-      <button>В корзину</button>
+      <span class="pizza-price">{{pizza.price | currency:'Руб ':'symbol':'1.0-0'}}</span>
+      <ng-container *ngIf="getCartCount(pizza.id) > 0; else addToCartBtn">
+        <button (click)="removeFromCart(pizza.id)">-</button>
+        <span style="margin: 0 8px;">{{getCartCount(pizza.id)}}</span>
+        <button (click)="addToCart(pizza.id)">+</button>
+      </ng-container>
+      <ng-template #addToCartBtn>
+        <button (click)="addToCart(pizza.id)">В корзину</button>
+      </ng-template>
     </div>
   </div>
 </div>
+</div>
+
+<!-- Плавающий кружок с суммой заказа -->
+<div class="cart-fab" *ngIf="totalCount > 0">
+  <span>{{ totalPrice | currency:'Руб ':'symbol':'1.0-0' }}</span>
 </div>

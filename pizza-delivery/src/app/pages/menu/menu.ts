@@ -18,6 +18,7 @@ export class Menu implements OnInit {
   error = '';
   allowedIngredients: string[] = ['курица', 'грибы', 'креветки', 'ветчина', 'пепперони'];
   selectedIngredient: string = '';
+  cart: { [pizzaId: number]: number } = {};
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -44,5 +45,36 @@ export class Menu implements OnInit {
     } else {
       this.filteredPizzas = this.pizzas;
     }
+  }
+
+  addToCart(pizzaId: number) {
+    if (this.cart[pizzaId]) {
+      this.cart[pizzaId]++;
+    } else {
+      this.cart[pizzaId] = 1;
+    }
+  }
+
+  removeFromCart(pizzaId: number) {
+    if (this.cart[pizzaId] > 1) {
+      this.cart[pizzaId]--;
+    } else if (this.cart[pizzaId] === 1){
+      delete this.cart[pizzaId];
+    }
+  }
+
+  getCartCount(pizzaId: number): number {
+    return this.cart[pizzaId] || 0;
+  }
+
+  get totalPrice(): number {
+    return Object.entries(this.cart).reduce((sum, [id, count]) => {
+      const pizza = this.pizzas.find(p => p.id === +id);
+      return pizza ? sum + pizza.price * count : sum;
+    }, 0);
+  }
+
+  get totalCount(): number {
+    return Object.values(this.cart).reduce((sum, c) => sum + c, 0);
   }
 }

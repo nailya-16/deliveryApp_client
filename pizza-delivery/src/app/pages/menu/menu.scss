@@ -127,6 +127,36 @@ h2 {
   animation: fadeDown 0.7s ease forwards;
 }
 
+.cart-fab {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  background: #ff9800;
+  color: #fff;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 5px 20px rgba(255,152,0,0.19);
+  z-index: 1000;
+  transition: background 0.2s;
+  cursor: pointer;
+
+  span {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}
+.pizza-footer button {
+  min-width: 36px;
+  padding: 0.4em 0.8em;
+}
+
 @keyframes fadeDown {
   to {
     opacity: 1;
