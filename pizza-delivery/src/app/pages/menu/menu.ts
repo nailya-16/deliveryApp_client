@@ -3,6 +3,7 @@ import { Pizza } from '../../models/pizza';
 import { PizzaService } from '../../services/pizza.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,9 +19,9 @@ export class Menu implements OnInit {
   error = '';
   allowedIngredients: string[] = ['курица', 'грибы', 'креветки', 'ветчина', 'пепперони'];
   selectedIngredient: string = '';
-  cart: { [pizzaId: number]: number } = {};
+  cart: { [pizzaId: string]: number } = {};
 
-  constructor(private pizzaService: PizzaService) {}
+  constructor(private pizzaService: PizzaService, private cartService: CartService  ) {}
 
   ngOnInit(): void {
     this.pizzaService.getPizzas().subscribe({
@@ -33,6 +34,10 @@ export class Menu implements OnInit {
         this.error = 'Ошибка загрузки меню';
         this.loading = false;
       }
+      
+    });
+    this.cartService.cart$.subscribe(cart => {
+      this.cart = cart;
     });
   }
 
@@ -48,19 +53,11 @@ export class Menu implements OnInit {
   }
 
   addToCart(pizzaId: number) {
-    if (this.cart[pizzaId]) {
-      this.cart[pizzaId]++;
-    } else {
-      this.cart[pizzaId] = 1;
-    }
+    this.cartService.add(pizzaId);
   }
 
   removeFromCart(pizzaId: number) {
-    if (this.cart[pizzaId] > 1) {
-      this.cart[pizzaId]--;
-    } else if (this.cart[pizzaId] === 1){
-      delete this.cart[pizzaId];
-    }
+    this.cartService.remove(pizzaId);
   }
 
   getCartCount(pizzaId: number): number {
