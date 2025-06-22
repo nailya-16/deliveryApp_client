@@ -1,1 +1,23 @@
-<p>order works!</p>
+<h2>Ваш заказ</h2>
+<div *ngIf="getCartIds().length === 0">Корзина пуста</div>
+<table *ngIf="getCartIds().length > 0">
+    <tr>
+        <th>Пицца</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let id of getCartIds()">
+        <td data-label="Пицца">{{ getPizzaName(id) }}</td>
+        <td data-label="Количество">{{ cart[id] }}</td>
+        <td data-label="Цена">{{ getPizzaPrice(id) | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
+        <td data-label="Сумма">{{ getPizzaPrice(id) * cart[id] | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
+        <td data-label=""><button (click)="remove(+id)">Удалить</button></td>
+    </tr>
+</table>
+<div *ngIf="getCartIds().length > 0">
+    <h3>Итого: {{ total | currency: 'Руб ':'symbol':'1.0-0' }}</h3>
+    <button (click)="clearCart()">Очистить корзину</button>
+    <button>Оформить заказ</button>
+</div>
