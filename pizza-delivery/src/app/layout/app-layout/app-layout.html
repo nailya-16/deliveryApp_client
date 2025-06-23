@@ -5,8 +5,13 @@
         <img src="pizza-logo.png" alt="Pizza Delivery" class="header-logo" />
         <span class="brand-title">Pizza Delivery</span>
       </div>
-      <p-menubar [model]="items"></p-menubar>
-      <button class="order-btn" routerLink="/order">Сделать заказ</button>
+      <div class="menu-and-cart">
+        <p-menubar [model]="items"></p-menubar>
+        <div class="cart-icon-block" (click)="goToOrder()">
+          <i class="pi pi-shopping-cart cart-icon"></i>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+        </div>
+      </div>
     </div>
     <div class="banner">🍕 Горячая доставка за 30 минут!</div>
   </header>
