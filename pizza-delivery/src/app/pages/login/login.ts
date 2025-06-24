@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,17 +22,20 @@ export class Login {
   loading = false;
   error = '';
 
-  constructor(private router: Router){}
-   async onSubmit() {
+  constructor(private auth: AuthService, private router: Router){}
+   
+  async onSubmit() {
     if (this.form.invalid) return;
     this.loading = true;
     this.error = '';
     try {
-      // Здесь должен быть вызов AuthService (например, через HTTP запрос)
-      // await this.auth.login(this.form.value.email, this.form.value.password);
+      await this.auth.login(
+        this.form.value.email as string,
+        this.form.value.password as string
+      ).toPromise();
       this.router.navigate(['/profile']); // после успешного входа
-    } catch (e) {
-      this.error = 'Ошибка входа';
+    } catch (e: any) {
+      this.error = e?.error?.message || 'Ошибка входа';
     }
     this.loading = false;
   }
