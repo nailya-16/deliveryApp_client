@@ -19,7 +19,7 @@
         [class.active]="selectedIngredient === ing"
         (click)="applyIngredientFilter(ing)">
         {{ ing }}
-      ></button>
+      </button>
     </div>
   </aside>
 
@@ -31,13 +31,13 @@
     
     <div class="pizza-footer">
       <span class="pizza-price">{{pizza.price | currency:'Руб ':'symbol':'1.0-0'}}</span>
-      <ng-container *ngIf="getCartCount(pizza.id) > 0; else addToCartBtn">
-        <button (click)="removeFromCart(pizza.id)">-</button>
-        <span style="margin: 0 8px;">{{getCartCount(pizza.id)}}</span>
-        <button (click)="addToCart(pizza.id)">+</button>
+      <ng-container *ngIf="getCartCount(pizza._id) > 0; else addToCartBtn">
+        <button (click)="removeFromCart(pizza._id)">-</button>
+        <span style="margin: 0 8px;">{{getCartCount(pizza._id)}}</span>
+        <button (click)="addToCart(pizza._id)">+</button>
       </ng-container>
       <ng-template #addToCartBtn>
-        <button (click)="addToCart(pizza.id)">В корзину</button>
+        <button (click)="addToCart(pizza._id)">В корзину</button>
       </ng-template>
     </div>
   </div>

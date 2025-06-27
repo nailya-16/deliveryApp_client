@@ -52,21 +52,22 @@ export class Menu implements OnInit {
     }
   }
 
-  addToCart(pizzaId: number) {
+  addToCart(pizzaId: string) {
+    console.log('addToCart id:', pizzaId, typeof pizzaId)
     this.cartService.add(pizzaId);
   }
 
-  removeFromCart(pizzaId: number) {
+  removeFromCart(pizzaId: string) {
     this.cartService.remove(pizzaId);
   }
 
-  getCartCount(pizzaId: number): number {
+  getCartCount(pizzaId: string): number {
     return this.cart[pizzaId] || 0;
   }
 
   get totalPrice(): number {
     return Object.entries(this.cart).reduce((sum, [id, count]) => {
-      const pizza = this.pizzas.find(p => p.id === +id);
+      const pizza = this.pizzas.find(p => p._id === id);
       return pizza ? sum + pizza.price * count : sum;
     }, 0);
   }
