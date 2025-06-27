@@ -5,20 +5,22 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-    private cartSubject = new BehaviorSubject<{ [pizzaId: number]: number }>({});
+    private cartSubject = new BehaviorSubject<{ [pizzaId: string]: number }>({});
     cart$ = this.cartSubject.asObservable();
 
     getCart() {
         return this.cartSubject.value;
     }
 
-    add(pizzaId: number) {
+    add(pizzaId: string) {
+        console.log('CartService.add:', pizzaId, typeof pizzaId);
         const cart = {...this.cartSubject.value};
         cart[pizzaId] = (cart[pizzaId] || 0) + 1;
         this.cartSubject.next(cart);
+        console.log('Cart after add:', cart);
     }
 
-    remove(pizzaId: number) {
+    remove(pizzaId: string) {
         const cart = {...this.cartSubject.value};
         if (cart[pizzaId]) {
             cart[pizzaId]--;
