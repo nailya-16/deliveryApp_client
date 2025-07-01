@@ -1,0 +1,46 @@
+<div class="auth-container">
+  <div class="auth-tabs">
+    <button [class.active]="mode==='login'" (click)="switchMode('login')">Вход</button>
+    <button [class.active]="mode==='register'" (click)="switchMode('register')">Регистрация</button>
+  </div>
+
+  <form *ngIf="mode==='login'" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+    <div class="p-field">
+      <label for="login-email">Email</label>
+      <input id="login-email" type="email" formControlName="email" />
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">Неверный email</div>
+    </div>
+    <div class="p-field">
+      <label for="login-password">Пароль</label>
+      <input id="login-password" type="password" formControlName="password" />
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">Введите пароль</div>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid || loading">Войти</button>
+  </form>
+
+  <form *ngIf="mode==='register'" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="register-form">
+    <div class="p-field">
+      <label for="reg-name">Имя</label>
+      <input id="reg-name" type="text" formControlName="name" />
+      <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error">Введите имя</div>
+    </div>
+    <div class="p-field">
+      <label for="reg-email">Email</label>
+      <input id="reg-email" type="email" formControlName="email" />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">Неверный email</div>
+    </div>
+    <div class="p-field">
+      <label for="reg-password">Пароль</label>
+      <input id="reg-password" type="password" formControlName="password" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">Минимум 6 символов</div>
+    </div>
+    <div class="p-field">
+      <label for="reg-password2">Повторите пароль</label>
+      <input id="reg-password2" type="password" formControlName="password2" />
+      <div *ngIf="registerForm.get('password2')?.invalid && registerForm.get('password2')?.touched" class="error">Пароли не совпадают</div>
+    </div>
+    <button type="submit" [disabled]="registerForm.invalid || loading">Зарегистрироваться</button>
+  </form>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>
