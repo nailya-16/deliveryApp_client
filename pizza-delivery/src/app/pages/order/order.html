@@ -13,11 +13,33 @@
         <td data-label="Количество">{{ cart[id] }}</td>
         <td data-label="Цена">{{ getPizzaPrice(id) | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
         <td data-label="Сумма">{{ getPizzaPrice(id) * cart[id] | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
-        <td data-label=""><button (click)="remove(+id)">Удалить</button></td>
+        <td data-label=""><button (click)="remove(id)">Удалить</button></td>
     </tr>
 </table>
 <div *ngIf="getCartIds().length > 0">
     <h3>Итого: {{ total | currency: 'Руб ':'symbol':'1.0-0' }}</h3>
     <button (click)="clearCart()">Очистить корзину</button>
-    <button>Оформить заказ</button>
+    <button (click)="openOrderModal()">Оформить заказ</button>
+</div>
+<div 
+  class="modal-backdrop" 
+  *ngIf="showModal"
+  (click)="closeOrderModal()"
+  style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:1000;"
+>
+  <div 
+    class="modal-content"
+    (click)="$event.stopPropagation()"
+    style="background:white;padding:2rem;border-radius:8px;min-width:320px;box-shadow:0 4px 20px #0002;"
+  >
+    <h3>Введите данные для заказа</h3>
+    <form (ngSubmit)="makeOrder()" #orderForm="ngForm">
+      <input [(ngModel)]="userName" name="userName" placeholder="Ваше имя" required style="display:block;width:100%;margin-bottom:1em;" />
+      <input [(ngModel)]="userPhone" name="userPhone" placeholder="Телефон" required style="display:block;width:100%;margin-bottom:1em;" />
+      <div style="display:flex;gap:1em;">
+        <button type="submit">Оформить заказ</button>
+        <button type="button" (click)="closeOrderModal()">Отмена</button>
+      </div>
+    </form>
+  </div>
 </div>
