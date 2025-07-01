@@ -1,1 +1,110 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <div class="profile-card">
+    <h2>Профиль</h2>
+    <div class="profile-tabs">
+      <button *ngFor="let tab of tabs"
+              (click)="activeTab = tab.key"
+              [class.active]="activeTab === tab.key">
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div [ngSwitch]="activeTab">
+      
+      <div *ngSwitchCase="'main'">
+        <form [formGroup]="profileForm" (ngSubmit)="onProfileSave()" class="profile-form">
+          <label>
+            Имя:
+            <input formControlName="name" type="text" />
+          </label>
+          <label>
+            Email:
+            <input formControlName="email" type="email" />
+          </label>
+          <label>
+            Телефон:
+            <input formControlName="phone" type="text" />
+          </label>
+          <label>
+            Город:
+            <input formControlName="city" type="text" />
+          </label>
+          <label>
+            Соцсети:
+            <input formControlName="social" type="text" placeholder="VK, Telegram..." />
+          </label>
+          <label>
+            Аватар:
+            <input type="file" (change)="onAvatarChange($event)" />
+            <img *ngIf="avatarPreview" [src]="avatarPreview" class="avatar-preview" />
+          </label>
+          <button type="submit" [disabled]="profileForm.invalid || loading">Сохранить</button>
+          <div *ngIf="profileSuccess" class="success-msg">Профиль обновлен!</div>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'activity'">
+        <div class="activity-list">
+          <div><b>Последний вход:</b> {{ user.lastLogin | date:'short' }}</div>
+          <div><b>Регистрация:</b> {{ user.createdAt | date:'short' }}</div>
+          <div><b>Действия:</b></div>
+          <ul>
+            <li *ngFor="let act of user.activity">{{ act.date | date:'short' }} — {{ act.action }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'notifications'">
+        <div *ngIf="user.notifications && user.notifications.length; else noNotify">
+          <ul>
+            <li *ngFor="let n of user.notifications">{{ n.text }} <span class="date">{{ n.date | date:'short' }}</span></li>
+          </ul>
+        </div>
+        <ng-template #noNotify><p>Уведомлений нет</p></ng-template>
+      </div>
+
+      <div *ngSwitchCase="'history'">
+        <div *ngIf="user.history && user.history.length; else noHistory">
+          <ul>
+            <li *ngFor="let h of user.history">{{ h.type }} — {{ h.info }} <span class="date">{{ h.date | date:'short' }}</span></li>
+          </ul>
+        </div>
+        <ng-template #noHistory><p>Нет записей</p></ng-template>
+      </div>
+
+      <div *ngSwitchCase="'settings'">
+        <label>
+          Тема:
+          <select [(ngModel)]="user.theme" (change)="onThemeChange()">
+            <option value="light">Светлая</option>
+            <option value="dark">Тёмная</option>
+          </select>
+        </label>
+      </div>
+
+      <div *ngSwitchCase="'security'">
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSave()" class="profile-form">
+          <label>
+            Новый пароль:
+            <input formControlName="password" type="password" />
+          </label>
+          <label>
+            Повторите пароль:
+            <input formControlName="password2" type="password" />
+          </label>
+          <button type="submit" [disabled]="passwordForm.invalid || loading">Сменить пароль</button>
+          <div *ngIf="passwordSuccess" class="success-msg">Пароль изменён!</div>
+          <div *ngIf="passwordError" class="error-msg">{{ passwordError }}</div>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'delete'">
+        <button class="danger-btn" (click)="deleteAccount()" [disabled]="loading">Удалить аккаунт</button>
+        <div *ngIf="deleteSuccess" class="success-msg">Аккаунт удалён</div>
+        <div *ngIf="deleteError" class="error-msg">{{ deleteError }}</div>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()">Выйти</button>
+  </div>
+
+</div>
