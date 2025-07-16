@@ -21,6 +21,7 @@ export class Order implements OnInit{
   userPhone: string = '';
   orderSuccess: boolean = false;
   showModal: boolean = false;
+  notification: string = '';
 
   constructor(
     private cartService: CartService, 
@@ -79,6 +80,10 @@ export class Order implements OnInit{
     this.showModal = false;
   }
 
+  onPhoneInput(event: any) {
+    this.userPhone = event.target.value.replace(/\D/g, '');
+  }
+
   makeOrder() {
     const cartArray = this.getCartIds().map(id => ({
       pizzaName: this.getPizzaName(id),
@@ -96,8 +101,14 @@ export class Order implements OnInit{
         this.clearCart();
         this.closeOrderModal();
       },
-      error: (err) => {
-        alert('Ошибка оформления заказа!');
+       error: (err) => {
+        console.log(err);
+        if (err.error?.message === 'Максимум 10 пицц одного вида в заказе') {
+          this.notification = err.error.message;
+          setTimeout(() => this.notification = '', 3000);
+        } else {
+          alert('Ошибка оформления заказа!');
+        }
       }
     });
   }
