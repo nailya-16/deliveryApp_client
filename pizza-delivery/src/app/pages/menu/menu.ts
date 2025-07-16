@@ -20,6 +20,7 @@ export class Menu implements OnInit {
   allowedIngredients: string[] = ['курица', 'грибы', 'креветки', 'ветчина', 'пепперони'];
   selectedIngredient: string = '';
   cart: { [pizzaId: string]: number } = {};
+  notification: string = '';
 
   constructor(private pizzaService: PizzaService, private cartService: CartService  ) {}
 
@@ -53,8 +54,14 @@ export class Menu implements OnInit {
   }
 
   addToCart(pizzaId: string) {
+    if (this.getCartCount(pizzaId) === 9) {
+      this.notification = 'Максимум 10 пицц одного вида в заказе';
+      setTimeout(() => this.notification = '', 3000);
+    }
     console.log('addToCart id:', pizzaId, typeof pizzaId)
+    if (this.getCartCount(pizzaId) < 10) {
     this.cartService.add(pizzaId);
+    }
   }
 
   removeFromCart(pizzaId: string) {

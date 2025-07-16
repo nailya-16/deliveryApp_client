@@ -1,5 +1,7 @@
 <h2>Меню пиццы</h2>
 
+ <div *ngIf="notification" class="notification">{{notification}}</div>
+
 <div *ngIf="loading">Загрузка...</div>
 <div *ngIf="error">{{error}}</div>
 
@@ -30,12 +32,13 @@
     <p class="pizza-desc">{{pizza.description}}</p>
     
     <div class="pizza-footer">
-      <span class="pizza-price">{{pizza.price | currency:'Руб ':'symbol':'1.0-0'}}</span>
+      <span class="pizza-price">{{pizza.price | number:'1.0-0' }} ₽</span>
       <ng-container *ngIf="getCartCount(pizza._id) > 0; else addToCartBtn">
         <button (click)="removeFromCart(pizza._id)">-</button>
         <span style="margin: 0 8px;">{{getCartCount(pizza._id)}}</span>
-        <button (click)="addToCart(pizza._id)">+</button>
+        <button (click)="addToCart(pizza._id)" [disabled]="getCartCount(pizza._id) >= 10">+</button>
       </ng-container>
+
       <ng-template #addToCartBtn>
         <button (click)="addToCart(pizza._id)">В корзину</button>
       </ng-template>
@@ -46,5 +49,12 @@
 
 <!-- Плавающий кружок с суммой заказа -->
 <div class="cart-fab" *ngIf="totalCount > 0">
-  <span>{{ totalPrice | currency:'Руб ':'symbol':'1.0-0' }}</span>
+  <span>{{ totalPrice | number:'1.0-0' }} ₽</span>
+</div>
+
+<div *ngIf="notification" class="modal-notification-backdrop">
+  <div class="modal-notification">
+    <span>{{notification}}</span>
+    <button class="modal-close-btn" (click)="notification = ''">×</button>
+  </div>
 </div>
