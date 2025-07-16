@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
+import { About } from './pages/about/about';
 import { Menu } from './pages/menu/menu';
 import { Order } from './pages/order/order';
 import { Profile } from './pages/profile/profile';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
+import { AuthPage } from './pages/auth/auth-page/auth-page.component';
 
 export const routes: Routes = [
-    { path: '', component: Home },
-    { path: 'menu', component: Menu },
+    { path: '', component: Menu },
+    { path: 'about', component: About },
     { path: 'order', component: Order },
     { path: 'profile', component: Profile },
-    { path: 'login', component: Login },
-    { path: 'register', component: Register },
+    { path: 'auth', component: AuthPage },
+    { path: '**', redirectTo: '' }
+    
 ];
