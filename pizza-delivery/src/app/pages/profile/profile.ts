@@ -133,8 +133,8 @@ export class Profile implements OnInit {
 
   // Смена темы
   onThemeChange() {
-    // Например, сохраняем в localStorage, либо вызываем сервис/метод
     localStorage.setItem('theme', this.user.theme);
+    document.body.className = this.user.theme;
   }
 
 
