@@ -11,13 +11,13 @@
     <tr *ngFor="let id of getCartIds()">
         <td data-label="Пицца">{{ getPizzaName(id) }}</td>
         <td data-label="Количество">{{ cart[id] }}</td>
-        <td data-label="Цена">{{ getPizzaPrice(id) | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
-        <td data-label="Сумма">{{ getPizzaPrice(id) * cart[id] | currency: 'Руб ': 'symbol': '1.0-0' }}</td>
+        <td data-label="Цена">{{ getPizzaPrice(id) | number:'1.0-0' }} ₽</td>
+        <td data-label="Сумма">{{ getPizzaPrice(id) * cart[id] | number:'1.0-0' }} ₽</td>
         <td data-label=""><button (click)="remove(id)">Удалить</button></td>
     </tr>
 </table>
 <div *ngIf="getCartIds().length > 0">
-    <h3>Итого: {{ total | currency: 'Руб ':'symbol':'1.0-0' }}</h3>
+    <h3>Итого: {{ total | number:'1.0-0' }} ₽</h3>
     <button (click)="clearCart()">Очистить корзину</button>
     <button (click)="openOrderModal()">Оформить заказ</button>
 </div>
@@ -34,10 +34,34 @@
   >
     <h3>Введите данные для заказа</h3>
     <form (ngSubmit)="makeOrder()" #orderForm="ngForm">
-      <input [(ngModel)]="userName" name="userName" placeholder="Ваше имя" required style="display:block;width:100%;margin-bottom:1em;" />
-      <input [(ngModel)]="userPhone" name="userPhone" placeholder="Телефон" required style="display:block;width:100%;margin-bottom:1em;" />
+      <input
+       [(ngModel)]="userName" 
+       name="userName" 
+       placeholder="Ваше имя" 
+       required 
+       style="display:block;width:100%;margin-bottom:1em;"
+       #userNameModel="ngModel" 
+       />
+      <div *ngIf="userNameModel.invalid && userNameModel.touched" class="input-error">
+        Имя обязательно
+      </div>
+
+      <input 
+        [(ngModel)]="userPhone" 
+        name="userPhone" 
+        placeholder="Телефон" 
+        required
+        pattern="^[0-9]{10,15}$"
+        maxlength="15" 
+        style="display:block;width:100%;margin-bottom:1em;" 
+        (input)="onPhoneInput($event)"
+        #userPhoneModel="ngModel"
+      />
+      <div *ngIf="userPhoneModel.invalid && userPhoneModel.touched" class="input-error">
+        Введите корректный номер (только цифры, 10-15 символов)
+      </div>
       <div style="display:flex;gap:1em;">
-        <button type="submit">Оформить заказ</button>
+        <button type="submit" [disabled]="orderForm.invalid">Оформить заказ</button>
         <button type="button" (click)="closeOrderModal()">Отмена</button>
       </div>
     </form>

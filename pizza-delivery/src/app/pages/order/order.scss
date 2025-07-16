@@ -57,6 +57,19 @@ div[ngIf] {
   font-size: 18px;
 }
 
+button:disabled,
+button[disabled] {
+  background: #ccc !important;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button:disabled:hover,
+button[disabled]:hover {
+  background: #ccc !important;
+}
+
 @media (max-width: 600px) {
   table, thead, tbody, th, td, tr {
     display: block;
