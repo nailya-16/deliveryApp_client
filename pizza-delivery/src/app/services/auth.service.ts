@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   updateProfile(data: any, avatarBase64?: string) {
-    // Можно добавить avatar в data, если нужно
+
     if (avatarBase64) {
       data.avatar = avatarBase64;
     }
